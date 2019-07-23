@@ -75,7 +75,7 @@ class TicTacToe
       board[win_array[1]] == board[win_array[2]] &&
       position_taken?(board, win_array[0])
     end
-end
+  end
   
   def full?(board)
     board.all?{|token| token == "X" || token == "O"}
