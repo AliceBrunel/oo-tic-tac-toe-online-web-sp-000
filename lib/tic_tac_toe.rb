@@ -46,7 +46,7 @@ class TicTacToe
     input = gets.strip
     index = input_to_index(input)
     if valid_move?(index) == true
-      move(index, current_player = "X")
+      move(index, current_player)
       display_board
     else
       puts "This move is not correct."
@@ -54,9 +54,9 @@ class TicTacToe
     end
   end
   
-  def turn_count(board)
+  def turn_count
     turns = 0
-    board.each do |token|
+    @board.each do |token|
       if token == "X" || token == "O"
         turns += 1
       end
@@ -65,38 +65,38 @@ class TicTacToe
   
   end
   
-  def current_player(board)
-    turn_count(board) % 2 == 0 ? "X" : "O"
+  def current_player
+    turn_count % 2 == 0 ? "X" : "O"
   end
   
-  def won?(board)
+  def won?
   WIN_COMBINATIONS.detect do |win_array|
-      board[win_array[0]] == board[win_array[1]] &&
-      board[win_array[1]] == board[win_array[2]] &&
-      position_taken?(board, win_array[0])
+      @board[win_array[0]] == @board[win_array[1]] &&
+      @board[win_array[1]] == @board[win_array[2]] &&
+      position_taken?(win_array[0])
     end
   end
   
-  def full?(board)
-    board.all?{|token| token == "X" || token == "O"}
+  def full?
+    @board.all?{|token| token == "X" || token == "O"}
   end
   
-  def draw?(board)
-    full?(board) && !won?(board)
+  def draw?
+    full? && !won?
   end
   
-  def over?(board)
-    won?(board) || full?(board)
+  def over?
+    won? || full?
   end
   
-  def winner(board)
-    if winning_array = won?(board)
-      board[winning_array.first]
+  def winner
+    if winning_array = won?
+      @board[winning_array.first]
     end
   end
   
-  def play(board)
-    while !over?(board) && !won?(board) && !draw?(board)
+  def play
+    while !over? && !won? && !draw?(board)
       turn(board)
     end
     if won?(board)
