@@ -47,7 +47,7 @@ class TicTacToe
     index = input_to_index(input)
     if valid_move?(index) == true
       move(index)
-      display_board
+      display_boardz
     else
       puts "This move is not correct."
       turn
